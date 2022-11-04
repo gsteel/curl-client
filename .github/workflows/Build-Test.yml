@@ -13,10 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         operating-system: [ubuntu-20.04]
-        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1']
+        php-versions: ['8.0', '8.1', '8.2']
         include:
-          - operating-system: ubuntu-16.04
-            php-versions: '7.1'
+          - php-versions: '8.0'
             COMPOSER_FLAGS: '--prefer-stable --prefer-lowest'
             PHPUNIT_FLAGS: '--coverage-clover build/coverage.xml'
 
@@ -57,7 +56,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: ${{ env.extensions }}
-          coverage: xdebug
+          coverage: pcov
           tools: pecl, composer
 
       - name: Get composer cache directory
